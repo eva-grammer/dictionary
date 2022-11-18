@@ -1,6 +1,6 @@
 # 20000 词汇巅 峰 速 记 班
 
-![Baidu](https://www.baidu.com/img/baidu_jgylogo3.gif)
+ 
 一、 词根： -cess， -ceed， -cede， -gress， -gred， -grad
 
 二、前缀 sub-, sup-, suc-, sus-
