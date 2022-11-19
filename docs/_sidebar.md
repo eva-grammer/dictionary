@@ -6,4 +6,5 @@
     *   第三节 [词根“-van， -ven， -vent”=come、 go](./第三节.md)
     *   第四节 [词根“-van， -ven， -vent”=come、 go](./第四节.md)
     *   第五节 [词根-fer=carry=be](./第五节.md)
+    *   第六节 [词根-fer=carry=be](./第六节.md)
 
