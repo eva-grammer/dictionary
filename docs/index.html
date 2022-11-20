@@ -26,8 +26,9 @@
     alert(1);
     alert( document.getElementsByTagName("A").length)
     var allLinks= document.getElementsByTagName("A");
-    for(var a in allLinks)
+    for(var i in allLinks)
     {
+        var a=allLinks[i];
          if(a.href.indexOf("https://dict.youdao.com/dictvoice")>-1)
          {
             a.onclick=function(a){
