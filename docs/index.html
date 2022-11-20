@@ -17,7 +17,13 @@
       window.$docsify = {
         name: "",
         repo: "",
-        loadSidebar: true
+        loadSidebar: true,
+        auto2top: true,
+         autoHeader: true,
+        markdown: function (marked, renderer) {
+    debugger;
+    return marked;
+  },
       };
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
