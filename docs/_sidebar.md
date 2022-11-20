@@ -12,4 +12,5 @@
     *   第九节 [词根-cern， -crim， -cert， -cris， -crit， -cree， -cret](./第九节.md)
     *   第十节 [词根-ian](./第十节.md)
     *   第十一节 [词根-pens， -(s)pend， -(s)pon](./第十一节.md)
+    *   第十二节 [词根-fin， -bin， -bund](./第十二节.md)
 
