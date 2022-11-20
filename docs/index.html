@@ -22,28 +22,27 @@
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script>
-    setTimeout(function(){
-    alert(1);
-    alert( document.getElementsByTagName("A").length)
+    setTimeout(function(){ 
     var allLinks= document.getElementsByTagName("A");
     for(var i in allLinks)
     {
         var a=allLinks[i];
-         if(a.href.indexOf("https://dict.youdao.com/dictvoice")>-1)
-         {
-             a.onclick=function(event){
-
-
-                
-                const audio=new Audio(event.srcElement.href);
+        a.onclick=function(event){ 
+            var url=event.srcElement.href;
+            if(url.indexOf("https://dict.youdao.com/dictvoice")>-1)
+            {
+                const audio=new Audio(url);
                 audio.play();
                 return false;
-            }
-         }
-
+            } 
+           
+        }
+        
     }
    
-},3000)
+},1000)
+
+
 
 
 
