@@ -25,15 +25,26 @@
     setTimeout(function(){
     alert(1);
     alert( document.getElementsByTagName("A").length)
-    document.getElementsByTagName("A").onclick =  function(a){
+    var allLinks= document.getElementsByTagName("A");
+    for(var a in allLinks)
+    {
+         if(a.href.indexOf("https://dict.youdao.com/dictvoice")>-1)
+         {
+            a.onclick=function(a){
 
 
-        alert(a);
-        return;
+                alert(a);
+                const autio=new Audio(a.href);
+                autio.play();
+                return false;
+            }
+         }
+
     }
-
-
+   
 },3000)
+
+
 
 
     </script>
