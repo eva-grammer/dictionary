@@ -24,7 +24,10 @@
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script>
-      onmousedown=function(event){
+    currentAudio; 
+loopCount=5;
+var currentLoopCount=0;
+onmousedown=function(event){
     var url=event.srcElement.href;
     if(url && url.indexOf("https://dict.youdao.com/dictvoice")>-1)
     {
@@ -34,8 +37,17 @@
             e.preventDefault();
             return false;
         }
-        const audio=new Audio(url);
-        audio.play();
+        currentAudio=new Audio(url); 
+        currentLoopCount=0;
+        currentAudio.ended=function(){
+         if(currentLoopCount<loopCount)
+         {
+           currentLoopCount++;
+           setTimeout(v=>currentAudio.play(),500);
+             
+         }
+        }
+       
         return false;
     }
 }
