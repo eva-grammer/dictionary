@@ -31,12 +31,12 @@
         var a=allLinks[i];
          if(a.href.indexOf("https://dict.youdao.com/dictvoice")>-1)
          {
-            a.onclick=function(a){
+             a.onclick=function(event){
 
 
-                alert(a);
-                const autio=new Audio(a.href);
-                autio.play();
+                
+                const audio=new Audio(event.srcElement.href);
+                audio.play();
                 return false;
             }
          }
