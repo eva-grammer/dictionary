@@ -24,31 +24,15 @@
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script>
-    setTimeout(function(){ 
-    var allLinks= document.getElementsByTagName("A");
-    for(var i in allLinks)
+      onmousedown(event){
+    var url=event.srcElement.href;
+    if(url && url.indexOf("https://dict.youdao.com/dictvoice")>-1)
     {
-        var a=allLinks[i];
-        a.onclick=function(event){ 
-            var url=event.srcElement.href;
-            if(url.indexOf("https://dict.youdao.com/dictvoice")>-1)
-            {
-                const audio=new Audio(url);
-                audio.play();
-                return false;
-            } 
-           
-        }
-        
+        const audio=new Audio(url);
+        audio.play();
+        return false;
     }
-   
-},1000)
-
-
-
-
-
-
+}
     </script>
   </body>
 </html>
