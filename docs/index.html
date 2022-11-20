@@ -28,6 +28,7 @@
     var url=event.srcElement.href;
     if(url && url.indexOf("https://dict.youdao.com/dictvoice")>-1)
     {
+      event.preventDefault()
         const audio=new Audio(url);
         audio.play();
         return false;
