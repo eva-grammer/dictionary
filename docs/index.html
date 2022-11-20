@@ -24,8 +24,8 @@
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script>
-    currentAudio; 
-loopCount=5;
+    const currentAudio=null; 
+const loopCount=5;
 var currentLoopCount=0;
 onmousedown=function(event){
     var url=event.srcElement.href;
@@ -43,10 +43,11 @@ onmousedown=function(event){
          if(currentLoopCount<loopCount)
          {
            currentLoopCount++;
-           setTimeout(v=>currentAudio.play(),500);
+           setTimeout(v=>currentAudio.play(),500); 
              
          }
         }
+         
        
         return false;
     }
