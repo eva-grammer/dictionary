@@ -29,7 +29,8 @@ const loopCount = 50;
 let currentLoopCount = 0;
 onmousedown = function (event) {
     var url = event.srcElement.href;
-    if (url && url.indexOf("https://dict.youdao.com/dictvoice") > -1) {
+    var isBoFang=event.srcElement.innerText=="播放"；
+    if (isBoFang ||（(url && url.indexOf("https://dict.youdao.com/dictvoice") > -1)) {
 
         event.preventDefault()
         event.srcElement.onclick = function (e) {
