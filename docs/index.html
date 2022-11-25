@@ -39,6 +39,9 @@ onmousedown = function (event) {
       e.preventDefault();
       return false;
     };
+    if(currentAudio!=null){
+    currentAudio.pause();
+    }
     currentAudio = new Audio(url);
     currentLoopCount = 0;
     currentAudio.onended = function () {
