@@ -52,4 +52,4 @@
 第二十五节 [词根-scrib，-scrip](https://eva-grammer.github.io/dictionary/#/./第二十五节.md)
 &#x9; [包含例句版本](https://eva-grammer.github.io/dictionary/#/./第二十五节_含例句.md)
 第二十六节 [词根-act， -ag， -ig](https://eva-grammer.github.io/dictionary/#/./第二十六节.md)
-&#x9; [包含例句版本](https://eva-grammer.github.io/dictionary/#/./第二十六节_含例句.md)
+&#x9; [包含例句版本](https://eva-grammer.github.io/dictionary/#/./第二十六节_含例句.md) 
