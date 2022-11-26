@@ -8,6 +8,9 @@ namespace ConsoleApp1
       
         static void Main(string[] args)
         {
+
+            
+
             var path = @"C:\BaiduNetdiskDownload\markdown\github\dictionary\docs1";
           var files=  System.IO.Directory.GetFiles(path);
             foreach (var item in files)
@@ -16,10 +19,10 @@ namespace ConsoleApp1
                 var name = file.Name;
                 if (name.StartsWith("第") && name.EndsWith(".md"))
                 {
+                   
 
-
-                 FileHandle.   ReplaceOneFile(item);
-
+                 // FileHandle.   ReplaceOneFile(item);
+                    AddExampleHandle.AddExample(item);
                 }
             }
             Console.WriteLine("finished...");
