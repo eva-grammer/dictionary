@@ -32,6 +32,7 @@ let lastElement = null;
 function stopPlay(element) {
 
     if (!element) return;
+   currentLoopCount=loopCount+2;
     element.innerText = element.oldText;
     if (currentAudio != null) {
         currentAudio.pause();
