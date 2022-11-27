@@ -29,22 +29,22 @@ const loopCount = 50;
 let currentLoopCount = 0;
 let lastElement = null;
 
-function stopPlay(element){
+function stopPlay(element) {
 
-    if(!element) return;
-    element.innerText =element.oldText;
+    if (!element) return;
+    element.innerText = element.oldText;
     if (currentAudio != null) {
         currentAudio.pause();
     }
 
 }
-function startPlay(element){
+function startPlay(element) {
 
     stopPlay(lastElement);
-    lastElement=element;
+    lastElement = element;
     element.oldText = element.innerText;
-    element.innerText="停止"; 
-   
+    element.innerText = "停止";
+
 }
 onmousedown = function (event) {
     var url = event.srcElement.href;
@@ -60,29 +60,27 @@ onmousedown = function (event) {
     }
 
 
-    if (
-        innerText == "播放" ||
-        (url && url.indexOf("https://dict.youdao.com/dictvoice") > -1)
-    ) {
+    let isBoFang = url && (innerText == "播放" || innerText == "英音" || innerText == "美音");
+
+    if (isBoFang) {
         event.preventDefault();
         event.srcElement.onclick = function (e) {
             e.preventDefault();
             return false;
         };
-         
-        startPlay(event.srcElement);   
+
+        startPlay(event.srcElement);
         currentAudio = new Audio(url);
         currentLoopCount = 0;
-        let timeOUt=500;
-        if(innerText == "播放"){
-            timeOUt=1000;
+        let timeOUt = 500;
+        if (innerText == "播放") {
+            timeOUt = 1000;
         }
         currentAudio.onended = function () {
             if (currentLoopCount < loopCount) {
                 currentLoopCount++;
                 setTimeout((v) => currentAudio.play(), timeOUt);
-            }else
-            {
+            } else {
                 stopPlay(lastElement);
             }
         };
@@ -90,6 +88,7 @@ onmousedown = function (event) {
         return false;
     }
 };
+
 
     </script>
   </body>
