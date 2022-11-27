@@ -27,32 +27,68 @@
    let currentAudio = null;
 const loopCount = 50;
 let currentLoopCount = 0;
-onmousedown = function (event) {
-  var url = event.srcElement.href;
-  var isBoFang = event.srcElement.innerText == "播放";
-  if (
-    isBoFang ||
-    (url && url.indexOf("https://dict.youdao.com/dictvoice") > -1)
-  ) {
-    event.preventDefault();
-    event.srcElement.onclick = function (e) {
-      e.preventDefault();
-      return false;
-    };
-    if(currentAudio!=null){
-    currentAudio.pause();
+let lastElement = null;
+
+function stopPlay(element){
+
+    if(!element) return;
+    element.innerText =element.oldText;
+    if (currentAudio != null) {
+        currentAudio.pause();
     }
-    currentAudio = new Audio(url);
-    currentLoopCount = 0;
-    currentAudio.onended = function () {
-      if (currentLoopCount < loopCount) {
-        currentLoopCount++;
-        setTimeout((v) => currentAudio.play(), 500);
-      }
-    };
-    currentAudio.play();
-    return false;
-  }
+
+}
+function startPlay(element){
+
+    stopPlay(lastElement);
+    lastElement=element;
+    element.oldText = element.innerText;
+    element.innerText="停止"; 
+   
+}
+onmousedown = function (event) {
+    var url = event.srcElement.href;
+    var innerText = event.srcElement.innerText;
+    if (innerText == "停止") {
+        event.preventDefault();
+        event.srcElement.onclick = function (e) {
+            e.preventDefault();
+            return false;
+        };
+        stopPlay(event.srcElement);
+        return false;
+    }
+
+
+    if (
+        innerText == "播放" ||
+        (url && url.indexOf("https://dict.youdao.com/dictvoice") > -1)
+    ) {
+        event.preventDefault();
+        event.srcElement.onclick = function (e) {
+            e.preventDefault();
+            return false;
+        };
+         
+        startPlay(event.srcElement);   
+        currentAudio = new Audio(url);
+        currentLoopCount = 0;
+        let timeOUt=500;
+        if(innerText == "播放"){
+            timeOUt=1000;
+        }
+        currentAudio.onended = function () {
+            if (currentLoopCount < loopCount) {
+                currentLoopCount++;
+                setTimeout((v) => currentAudio.play(), timeOUt);
+            }else
+            {
+                stopPlay(lastElement);
+            }
+        };
+        currentAudio.play();
+        return false;
+    }
 };
 
     </script>
