@@ -1,7 +1,8 @@
 # 20000 词汇巅 峰 速 记 班
 
 *   第零节 [课后作业及每月一测](https://eva-grammer.github.io/dictionary/#/./课后作业.md)
-*   第一节 [词根： -cess， -ceed， -cede， -gress， -gred， -grad](https://eva-grammer.github.io/dictionary/#/./第一节.md)\n\n
+*   第一节 [词根： -cess， -ceed， -cede， -gress， -gred， -grad](https://eva-grammer.github.io/dictionary/#/./第一节.md)
+*   
        [包含例句版](https://eva-grammer.github.io/dictionary/#/./第一节_含例句.md)
 *   第二节 [前缀 sub-, sup-, suc-, sus-](https://eva-grammer.github.io/dictionary/#/./第二节.md)
 	    *   &#x9; [包含例句版](https://eva-grammer.github.io/dictionary/#/./第二节_含例句.md)
