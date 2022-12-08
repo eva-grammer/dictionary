@@ -25,7 +25,7 @@
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script> 
  
-    
+     
 let currentAudio = null;
 const loopCount = 50;
 let currentLoopCount = 0;
@@ -55,6 +55,9 @@ function startPlay(element) {
 
 }
 onmousedown = function (event) {
+    if (event.srcElement.tagName != "A") {
+        return;
+    }
     var url = event.srcElement.href;
     var innerText = event.srcElement.innerText;
     if (innerText == "停止") {
@@ -178,11 +181,6 @@ function createNewElement() {
     input.id = "playduringtime";
     input.value = "30";
     input.type = "text";
-    var button1 = document.createElement("button");
-    button1.textContent = "+";
-    button1.click = function () {
-        input.value = 4;
-    }
 
     var button2 = document.createTextNode("button");
     var lable2 = document.createTextNode("分钟; ");
@@ -201,7 +199,6 @@ function createNewElement() {
 
     article.insertBefore(lable1, qutoelement);
     article.insertBefore(input, qutoelement);
-    article.insertBefore(button1, qutoelement);
     article.insertBefore(lable2, qutoelement);
     article.insertBefore(lable3, qutoelement);
     article.insertBefore(input2, qutoelement);
