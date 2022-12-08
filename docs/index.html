@@ -25,7 +25,8 @@
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script> 
 
- 
+   const { setTimeout } = require("core-js/shim");
+
 let currentAudio = null;
 const loopCount = 50;
 let currentLoopCount = 0;
@@ -160,7 +161,43 @@ function playOne(element, callBack) {
 
 
 }
+function setLoopCount() {
+    var element = document.getElementById("playcount");
+    loopCount = element.value * 1;
+}
 
+function setplayTime() {
+    var element = document.getElementById("playduringtime");
+    totalLoopTime = element.value * 60 * 1000;
+
+}
+function createNewElement() {
+
+    var lable1 = document.createTextNode("持续播放");
+    var input = document.createElement("input");
+    input.value = "30";
+    input.id = "playduringtime";
+    var lable2 = document.createTextNode("分钟 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+
+    var lable3 = document.createTextNode("每次播放循环");
+
+    var input2 = document.createElement("input");
+    input2.value = "50";
+    input2.id = "playcount";
+    var lable4 = document.createTextNode("次");
+    var qutoelement = document.getElementsByTagName("blockquote")[0];
+    document.insertBefore(lable1, qutoelement);
+    document.insertBefore(input, qutoelement);
+    document.insertBefore(lable2, qutoelement);
+    document.insertBefore(lable3, qutoelement);
+    document.insertBefore(input2, qutoelement);
+    document.insertBefore(lable4, qutoelement);
+    input.onchange = setplayTime;
+    input2.onchange = setLoopCount;
+}
+document.addEventListener("load", function () {
+    setTimeout(() => createNewElement(), 1000)
+});
 
     </script>
   </body>
