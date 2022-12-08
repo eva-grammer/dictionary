@@ -25,7 +25,7 @@
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script> 
  
-  
+   
 let currentAudio = null;
 const loopCount = 50;
 let currentLoopCount = 0;
@@ -177,7 +177,7 @@ function createNewElement() {
     var input = document.createElement("input");
     input.id = "playduringtime";
     input.value = "30";
-    input.readOnly = false;
+    input.type = "text";
 
     var lable2 = document.createTextNode("分钟; ");
 
@@ -186,7 +186,7 @@ function createNewElement() {
     var input2 = document.createElement("input");
     input2.id = "playcount";
     input2.value = "50";
-    input2.readOnly = false;
+    input2.type = "text";
 
     var lable4 = document.createTextNode("次");
     var article = document.getElementsByTagName("article")[0];
