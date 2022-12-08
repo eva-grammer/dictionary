@@ -24,10 +24,9 @@
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script> 
- 
-     
+  
 let currentAudio = null;
-const loopCount = 50;
+let loopCount = 50;
 let currentLoopCount = 0;
 let lastElement = null;
 let allElements = [];
@@ -159,7 +158,16 @@ function playOne(element, callBack) {
             }
         }
     };
-    currentAudio.play();
+    try { currentAudio.play(); }
+    catch (e) {
+        console.error(e);
+        currentLoopCount = loopCount;
+        stopPlay(lastElement);
+        if (callBack) {
+            callBack();
+        }
+    }
+
 
 
 }
@@ -182,7 +190,6 @@ function createNewElement() {
     input.value = "30";
     input.type = "text";
 
-    var button2 = document.createTextNode("button");
     var lable2 = document.createTextNode("分钟; ");
 
     var lable3 = document.createTextNode("每次播放循环");
