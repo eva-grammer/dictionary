@@ -25,7 +25,7 @@
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script> 
  
- 
+  
 let currentAudio = null;
 const loopCount = 50;
 let currentLoopCount = 0;
@@ -71,7 +71,7 @@ onmousedown = function (event) {
 
 
     let isBoFang = url && (innerText == "播放" || innerText == "英音" || innerText == "美音");
-
+    createElementWithInput();
     if (isBoFang) {
         fourceStop = false;
         event.preventDefault();
@@ -170,24 +170,29 @@ function setplayTime() {
     totalLoopTime = element.value * 60 * 1000;
 
 }
+
 function createNewElement() {
 
     var lable1 = document.createTextNode("持续播放");
     var input = document.createElement("input");
-    input.value = "30";
     input.id = "playduringtime";
+    input.value = "30";
+    input.readOnly = false;
+
     var lable2 = document.createTextNode("分钟; ");
 
     var lable3 = document.createTextNode("每次播放循环");
 
     var input2 = document.createElement("input");
-    input2.value = "50";
     input2.id = "playcount";
+    input2.value = "50";
+    input2.readOnly = false;
+
     var lable4 = document.createTextNode("次");
     var article = document.getElementsByTagName("article")[0];
     var qutoelement = document.getElementsByTagName("blockquote")[0];
 
-    
+
     article.insertBefore(lable1, qutoelement);
     article.insertBefore(input, qutoelement);
     article.insertBefore(lable2, qutoelement);
@@ -197,8 +202,13 @@ function createNewElement() {
     input.onchange = setplayTime;
     input2.onchange = setLoopCount;
 }
-setTimeout(() => createNewElement(), 1000)
-
+function createElementWithInput() {
+    var inputLength = document.getElementsByTagName("input").length;
+    if (inputLength == 0) {
+        createNewElement();
+    }
+}
+setTimeout(v => createElementWithInput(), 1000);
     </script>
   </body>
 </html>
