@@ -25,7 +25,7 @@
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script> 
  
-
+ 
 let currentAudio = null;
 const loopCount = 50;
 let currentLoopCount = 0;
@@ -176,7 +176,7 @@ function createNewElement() {
     var input = document.createElement("input");
     input.value = "30";
     input.id = "playduringtime";
-    var lable2 = document.createTextNode("分钟 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    var lable2 = document.createTextNode("分钟; ");
 
     var lable3 = document.createTextNode("每次播放循环");
 
@@ -184,19 +184,20 @@ function createNewElement() {
     input2.value = "50";
     input2.id = "playcount";
     var lable4 = document.createTextNode("次");
+    var article = document.getElementsByTagName("article")[0];
     var qutoelement = document.getElementsByTagName("blockquote")[0];
-    document.insertBefore(lable1, qutoelement);
-    document.insertBefore(input, qutoelement);
-    document.insertBefore(lable2, qutoelement);
-    document.insertBefore(lable3, qutoelement);
-    document.insertBefore(input2, qutoelement);
-    document.insertBefore(lable4, qutoelement);
+
+    
+    article.insertBefore(lable1, qutoelement);
+    article.insertBefore(input, qutoelement);
+    article.insertBefore(lable2, qutoelement);
+    article.insertBefore(lable3, qutoelement);
+    article.insertBefore(input2, qutoelement);
+    article.insertBefore(lable4, qutoelement);
     input.onchange = setplayTime;
     input2.onchange = setLoopCount;
 }
- 
-    setTimeout(() => createNewElement(), 1000)
- 
+setTimeout(() => createNewElement(), 1000)
 
     </script>
   </body>
