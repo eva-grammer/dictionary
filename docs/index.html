@@ -23,22 +23,28 @@
       };
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-    <script>
-   let currentAudio = null;
+    <script> 
+
+let currentAudio = null;
 const loopCount = 50;
 let currentLoopCount = 0;
 let lastElement = null;
+let allElements = [];
+let currentIndex = -1;
 
+let startDate, endTime;
+let totalLoopTime = 1800000;
+let fourceStop = false;
 function stopPlay(element) {
-
     if (!element) return;
-   currentLoopCount=loopCount+2;
+    currentLoopCount = loopCount + 1;
     element.innerText = element.oldText;
     if (currentAudio != null) {
         currentAudio.pause();
     }
 
 }
+
 function startPlay(element) {
 
     stopPlay(lastElement);
@@ -56,40 +62,103 @@ onmousedown = function (event) {
             e.preventDefault();
             return false;
         };
+        fourceStop = true;
         stopPlay(event.srcElement);
         return false;
     }
 
 
+
     let isBoFang = url && (innerText == "播放" || innerText == "英音" || innerText == "美音");
 
     if (isBoFang) {
+        fourceStop = false;
         event.preventDefault();
+
         event.srcElement.onclick = function (e) {
             e.preventDefault();
             return false;
         };
-
-        startPlay(event.srcElement);
-        currentAudio = new Audio(url);
-        currentLoopCount = 0;
-        let timeOUt = 500;
-        if (innerText == "播放") {
-            timeOUt = 1000;
+        if (innerText == "英音") { playOne(event.srcElement); }
+        else {
+            startDate = new Date();
+            startLooPlay(url);
         }
-        currentAudio.onended = function () {
-            if (currentLoopCount < loopCount) {
-                currentLoopCount++;
-                setTimeout((v) => currentAudio.play(), timeOUt);
-            } else {
-                stopPlay(lastElement);
-            }
-        };
-        currentAudio.play();
-        return false;
+
     }
+    return false;
 };
 
+function getAllPlayElements() {
+    if (allElements.length > 0) {
+        return;
+    }
+    var elements = document.getElementsByTagName("a");
+    elements.forEach(element => {
+        let innerText = element.innerText;
+        let url = element.href;
+        let isBoFang = url && (innerText == "播放" || innerText == "美音");
+
+        if (isBoFang) {
+            allElements.push(element);
+        }
+    });
+
+}
+function startLooPlay(startUrl) {
+    getAllPlayElements();
+    for (var i = 0; i < allElements.length; i++) {
+        let element = allElements[i];
+        let url = element.href;
+        if (startUrl == url) {
+            currentIndex = i;
+            break;
+        }
+    }
+    looPlay();
+
+}
+
+function looPlay() {
+    if (currentIndex == -1 || currentIndex == allElements.length) {
+        currentIndex = 0;
+    }
+    let element = allElements[currentIndex];
+    playOne(element, function () {
+        currentIndex++;
+        endTime = new Date();
+        if (!fourceStop && (endTime - startDate) < totalLoopTime) {
+            looPlay();
+        }
+
+    })
+}
+
+function playOne(element, callBack) {
+    startPlay(element);
+    let url = element.href;
+    currentAudio = new Audio(url);
+    currentLoopCount = 0;
+    let timeOUt = 500;
+    var innerText = element.innerText;
+    if (innerText == "播放") {
+        timeOUt = 1000;
+    }
+    currentAudio.onended = function () {
+        if (currentLoopCount < loopCount) {
+            currentLoopCount++;
+            setTimeout((v) => currentAudio.play(), timeOUt);
+        } else {
+            stopPlay(lastElement);
+            if (callBack) {
+                callBack();
+            }
+        }
+    };
+    currentAudio.play();
+
+
+}
 
     </script>
   </body>
