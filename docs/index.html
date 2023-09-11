@@ -13,213 +13,202 @@
   </head>
   <body>
     <div id="app"></div>
-     <script>
+    <script>
       window.$docsify = {
         name: "",
         repo: "",
         loadSidebar: true,
         auto2top: true,
-         autoHeader: true, 
+        autoHeader: true,
       };
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-    <script> 
-  
-let currentAudio = null;
-let loopCount = 50;
-let currentLoopCount = 0;
-let lastElement = null;
-let allElements = [];
-let currentIndex = -1;
+    <script>
+      let currentAudio = null;
+      let loopCount = 50;
+      let currentLoopCount = 0;
+      let lastElement = null;
+      let allElements = [];
+      let currentIndex = -1;
 
-let startDate, endTime;
-let totalLoopTime = 1800000;
-let fourceStop = false;
-function stopPlay(element) {
-    if (!element) return;
-    currentLoopCount = loopCount + 1;
-    element.innerText = element.oldText;
-    if (currentAudio != null) {
-        currentAudio.pause();
-    }
+      let startDate, endTime;
+      let totalLoopTime = 1800000;
+      let fourceStop = false;
+      function stopPlay(element) {
+        if (!element) return;
+        currentLoopCount = loopCount + 1;
+        element.innerText = element.oldText;
+        if (currentAudio != null) {
+          currentAudio.pause();
+        }
+      }
 
-}
-
-function startPlay(element) {
-
-    stopPlay(lastElement);
-    lastElement = element;
-    element.oldText = element.innerText;
-    element.innerText = "停止";
-
-}
-onmousedown = function (event) {
-    if (event.srcElement.tagName != "A") {
-        return;
-    }
-    var url = event.srcElement.href;
-    var innerText = event.srcElement.innerText;
-    if (innerText == "停止") {
-        event.preventDefault();
-        event.srcElement.onclick = function (e) {
+      function startPlay(element) {
+        stopPlay(lastElement);
+        lastElement = element;
+        element.oldText = element.innerText;
+        element.innerText = "停止";
+      }
+      onmousedown = function (event) {
+        if (event.srcElement.tagName != "A") {
+          return;
+        }
+        var url = event.srcElement.href;
+        var innerText = event.srcElement.innerText;
+        if (innerText == "停止") {
+          event.preventDefault();
+          event.srcElement.onclick = function (e) {
             e.preventDefault();
             return false;
-        };
-        fourceStop = true;
-        stopPlay(event.srcElement);
-        return false;
-    }
-
-
-
-    let isBoFang = url && (innerText == "播放" || innerText == "英音" || innerText == "美音");
-    createElementWithInput();
-    if (isBoFang) {
-        fourceStop = false;
-        event.preventDefault();
-
-        event.srcElement.onclick = function (e) {
-            e.preventDefault();
-            return false;
-        };
-        if (innerText == "英音") { playOne(event.srcElement); }
-        else {
-            startDate = new Date();
-            startLooPlay(url);
+          };
+          fourceStop = true;
+          stopPlay(event.srcElement);
+          return false;
         }
 
-    }
-    return false;
-};
-
-function getAllPlayElements() {
-    if (allElements.length > 0) {
-        return;
-    }
-    var elements = document.getElementsByTagName("a");
-    for (var i = 0; i < elements.length; i++) {
-        let element = elements[i];
-        let innerText = element.innerText;
-        let url = element.href;
-        let isBoFang = url && (innerText == "播放" || innerText == "美音");
-
+        let isBoFang =
+          url &&
+          (innerText == "播放" || innerText == "英音" || innerText == "美音");
+        createElementWithInput();
         if (isBoFang) {
-            allElements.push(element);
+          fourceStop = false;
+          event.preventDefault();
+
+          event.srcElement.onclick = function (e) {
+            e.preventDefault();
+            return false;
+          };
+          if (innerText == "英音") {
+            playOne(event.srcElement);
+          } else {
+            startDate = new Date();
+            startLooPlay(event.srcElement);
+          }
         }
-    }
-}
-function startLooPlay(startUrl) {
-    getAllPlayElements();
-    for (var i = 0; i < allElements.length; i++) {
-        let element = allElements[i];
-        let url = element.href;
-        if (startUrl == url) {
+        return false;
+      };
+
+      function getAllPlayElements() {
+        if (allElements.length > 0) {
+          return;
+        }
+        var elements = document.getElementsByTagName("a");
+        for (var i = 0; i < elements.length; i++) {
+          let element = elements[i];
+          let innerText = element.innerText;
+          let url = element.href;
+          let isBoFang = url && (innerText == "播放" || innerText == "美音");
+
+          if (isBoFang) {
+            allElements.push(element);
+          }
+        }
+      }
+      function startLooPlay(srcElement) {
+        getAllPlayElements();
+        for (var i = 0; i < allElements.length; i++) {
+          let element = allElements[i];
+
+          if (srcElement == element) {
             currentIndex = i;
             break;
+          }
         }
-    }
-    looPlay();
+        looPlay();
+      }
 
-}
-
-function looPlay() {
-    if (currentIndex == -1 || currentIndex == allElements.length) {
-        currentIndex = 0;
-    }
-    let element = allElements[currentIndex];
-    playOne(element, function () {
-        currentIndex++;
-        endTime = new Date();
-        if (!fourceStop && (endTime - startDate) < totalLoopTime) {
+      function looPlay() {
+        if (currentIndex == -1 || currentIndex == allElements.length) {
+          currentIndex = 0;
+        }
+        let element = allElements[currentIndex];
+        playOne(element, function () {
+          currentIndex++;
+          endTime = new Date();
+          if (!fourceStop && endTime - startDate < totalLoopTime) {
             looPlay();
+          }
+        });
+      }
+
+      function playOne(element, callBack) {
+        startPlay(element);
+        let url = element.href;
+        currentAudio = new Audio(url);
+        currentLoopCount = 0;
+        let timeOUt = 500;
+        var innerText = element.innerText;
+        if (innerText == "播放") {
+          timeOUt = 1000;
         }
-
-    })
-}
-
-function playOne(element, callBack) {
-    startPlay(element);
-    let url = element.href;
-    currentAudio = new Audio(url);
-    currentLoopCount = 0;
-    let timeOUt = 500;
-    var innerText = element.innerText;
-    if (innerText == "播放") {
-        timeOUt = 1000;
-    }
-    currentAudio.onended = function () {
-        if (currentLoopCount < loopCount) {
+        currentAudio.onended = function () {
+          if (currentLoopCount < loopCount) {
             currentLoopCount++;
             setTimeout((v) => currentAudio.play(), timeOUt);
-        } else {
+          } else {
             stopPlay(lastElement);
             if (callBack) {
-                callBack();
+              callBack();
             }
-        }
-    };
-    try { currentAudio.play(); }
-    catch (e) {
-        console.error(e);
-        currentLoopCount = loopCount;
-        stopPlay(lastElement);
-        if (callBack) {
+          }
+        };
+        try {
+          currentAudio.play();
+        } catch (e) {
+          console.error(e);
+          currentLoopCount = loopCount;
+          stopPlay(lastElement);
+          if (callBack) {
             callBack();
+          }
         }
-    }
+      }
+      function setLoopCount() {
+        var element = document.getElementById("playcount");
+        loopCount = element.value * 1;
+      }
 
+      function setplayTime() {
+        var element = document.getElementById("playduringtime");
+        totalLoopTime = element.value * 60 * 1000;
+      }
 
+      function createNewElement() {
+        var lable1 = document.createTextNode("持续播放");
+        var input = document.createElement("input");
+        input.id = "playduringtime";
+        input.value = "30";
+        input.type = "text";
 
-}
-function setLoopCount() {
-    var element = document.getElementById("playcount");
-    loopCount = element.value * 1;
-}
+        var lable2 = document.createTextNode("分钟; ");
 
-function setplayTime() {
-    var element = document.getElementById("playduringtime");
-    totalLoopTime = element.value * 60 * 1000;
+        var lable3 = document.createTextNode("每次播放循环");
 
-}
+        var input2 = document.createElement("input");
+        input2.id = "playcount";
+        input2.value = "50";
+        input2.type = "text";
 
-function createNewElement() {
+        var lable4 = document.createTextNode("次");
+        var article = document.getElementsByTagName("article")[0];
+        var qutoelement = document.getElementsByTagName("blockquote")[0];
 
-    var lable1 = document.createTextNode("持续播放");
-    var input = document.createElement("input");
-    input.id = "playduringtime";
-    input.value = "30";
-    input.type = "text";
-
-    var lable2 = document.createTextNode("分钟; ");
-
-    var lable3 = document.createTextNode("每次播放循环");
-
-    var input2 = document.createElement("input");
-    input2.id = "playcount";
-    input2.value = "50";
-    input2.type = "text";
-
-    var lable4 = document.createTextNode("次");
-    var article = document.getElementsByTagName("article")[0];
-    var qutoelement = document.getElementsByTagName("blockquote")[0];
-
-
-    article.insertBefore(lable1, qutoelement);
-    article.insertBefore(input, qutoelement);
-    article.insertBefore(lable2, qutoelement);
-    article.insertBefore(lable3, qutoelement);
-    article.insertBefore(input2, qutoelement);
-    article.insertBefore(lable4, qutoelement);
-    input.onchange = setplayTime;
-    input2.onchange = setLoopCount;
-}
-function createElementWithInput() {
-    var inputLength = document.getElementsByTagName("input").length;
-    if (inputLength == 0) {
-        createNewElement();
-    }
-}
-setTimeout(v => createElementWithInput(), 1000);
+        article.insertBefore(lable1, qutoelement);
+        article.insertBefore(input, qutoelement);
+        article.insertBefore(lable2, qutoelement);
+        article.insertBefore(lable3, qutoelement);
+        article.insertBefore(input2, qutoelement);
+        article.insertBefore(lable4, qutoelement);
+        input.onchange = setplayTime;
+        input2.onchange = setLoopCount;
+      }
+      function createElementWithInput() {
+        var inputLength = document.getElementsByTagName("input").length;
+        if (inputLength == 0) {
+          createNewElement();
+        }
+      }
+      setTimeout((v) => createElementWithInput(), 1000);
     </script>
   </body>
 </html>
