@@ -26,7 +26,7 @@
     <script>
       
  
- let currentAudio = null;
+  let currentAudio = null;
 let playwordsplitAudio = null;
 let playhanAudio = null;
 let loopCount = 50;
@@ -149,7 +149,7 @@ function playOne(element, callBack) {
     currentAudio.onended = function () {
         if (currentLoopCount < loopCount) {
             currentLoopCount++;
-            if (currentLoopCount % preCountPlayHan == 0) {
+            if (isPlayHan && currentLoopCount % preCountPlayHan == 0) {
                 playSplitWord(element, function () {
                     setTimeout((v) => currentAudio.play(), timeOUt);
                 });
@@ -185,7 +185,18 @@ function playSplitWord(element, callBack) {
             playHan(element, callBack)
 
         };
-        playwordsplitAudio.play();
+        try {
+            playwordsplitAudio.play().then(() => { }, (r) => {
+                if (callBack) {
+                    callBack();
+                } console.log(r);
+            });
+        } catch (error) {
+            if (callBack) {
+                callBack();
+            }
+        }
+
     } else {
 
         if (callBack) {
@@ -201,7 +212,7 @@ function playHan(element, callBack) {
         chinese = encodeURIComponent(chinese);
         var url = `https://fanyi.baidu.com/gettts?lan=zh&text=${chinese}&spd=5&source=web`;
         playhanAudio = new Audio(url);
- playhanAudio.setAttribute('crossorigin', 'anonymous');    
+
         playhanAudio.onended = function () {
 
             if (callBack) {
@@ -210,8 +221,17 @@ function playHan(element, callBack) {
 
         };
         playhanAudio.controls = true;
-        playhanAudio.load(url)
-        playhanAudio.play();
+        try {
+            playhanAudio.play().then(() => { }, (r) => {
+                if (callBack) {
+                    callBack();
+                } console.log(r);
+            });
+        } catch (error) {
+            if (callBack) {
+                callBack();
+            }
+        }
     } else {
 
         if (callBack) {
