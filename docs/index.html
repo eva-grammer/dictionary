@@ -321,7 +321,7 @@ function addTestButton() {
    var input = document.createElement("button");
     input.id = "testplayhan";
     input.innerText = "testplayhan";
-    var url = `https://fanyi.baidu.com/gettts?lan=zh&text=%20%E4%B8%8D%E6%B4%BB%E5%8A%A8%EF%BC%9B%E4%B8%8D%E4%BD%9C%E4%B8%BA%2014928&spd=5&source=web`;
+    var url = `https://dict-mobile.iciba.com/interface/index.php?c=word&m=translatetts&client=6&timestamp=1697707413&sign=e4990a37cb88f1e0&word=%E5%8F%91%E9%80%81%E8%AF%95%E8%AF%95&tts_lan=8`;
 
     let playhanAudio1 = new Audio(url);
     var article = document.getElementsByTagName("article")[0];
@@ -348,7 +348,7 @@ function addTestButton() {
   
 }
 function playHanTest() {
-    var url = `https://fanyi.baidu.com/gettts?lan=zh&text=%20%E4%B8%8D%E6%B4%BB%E5%8A%A8%EF%BC%9B%E4%B8%8D%E4%BD%9C%E4%B8%BA%2014928&spd=5&source=web`;
+    var url = `https://dict-mobile.iciba.com/interface/index.php?c=word&m=translatetts&client=6&timestamp=1697707413&sign=e4990a37cb88f1e0&word=%E5%8F%91%E9%80%81%E8%AF%95%E8%AF%95&tts_lan=8`;
     let playhanAudio = new Audio(url);
     playhanAudio.play();
 }
