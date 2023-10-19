@@ -318,17 +318,24 @@ function createElementWithInput() {
 }
 setTimeout((v) => createElementWithInput(), 1000);
 function addTestButton() {
-    var input = document.createElement("button");
+   var input = document.createElement("button");
     input.id = "testplayhan";
     input.innerText = "testplayhan";
     var url = `https://fanyi.baidu.com/gettts?lan=zh&text=%20%E4%B8%8D%E6%B4%BB%E5%8A%A8%EF%BC%9B%E4%B8%8D%E4%BD%9C%E4%B8%BA%2014928&spd=5&source=web`;
 
     let playhanAudio1 = new Audio(url);
     playhanAudio1.controls = true;
+    playhanAudio1.oncanplay = function (s) {
+        console.log("oncanplay ======================)")
+        console.log(s)
+    }
+    playhanAudio1.onload = function (s) {
+        console.log("koaddedddd ======================)")
+        console.log(s)
+    }
     input.onclick = function () {
         playhanAudio1.play();
     }
-
 
     var article = document.getElementsByTagName("article")[0];
 
