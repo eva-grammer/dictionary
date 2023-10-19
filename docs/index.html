@@ -150,7 +150,7 @@ function playOne(element, callBack) {
         if (currentLoopCount < loopCount) {
             currentLoopCount++;
             if (isPlayHan && currentLoopCount % preCountPlayHan == 0) {
-                playSplitWord(element, function () {
+                playHan(element, function () {
                     setTimeout((v) => currentAudio.play(), timeOUt);
                 });
             } else { setTimeout((v) => currentAudio.play(), timeOUt); }
