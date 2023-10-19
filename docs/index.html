@@ -324,6 +324,10 @@ function addTestButton() {
     var url = `https://fanyi.baidu.com/gettts?lan=zh&text=%20%E4%B8%8D%E6%B4%BB%E5%8A%A8%EF%BC%9B%E4%B8%8D%E4%BD%9C%E4%B8%BA%2014928&spd=5&source=web`;
 
     let playhanAudio1 = new Audio(url);
+    var article = document.getElementsByTagName("article")[0];
+
+    article.appendChild(playhanAudio1)
+    article.appendChild(input)
     playhanAudio1.controls = true;
     playhanAudio1.oncanplay = function (s) {
         console.log("oncanplay ======================)")
@@ -341,10 +345,7 @@ function addTestButton() {
         playhanAudio1.play();
     }
 
-    var article = document.getElementsByTagName("article")[0];
-
-    article.appendChild(playhanAudio1)
-    article.appendChild(input)
+  
 }
 function playHanTest() {
     var url = `https://fanyi.baidu.com/gettts?lan=zh&text=%20%E4%B8%8D%E6%B4%BB%E5%8A%A8%EF%BC%9B%E4%B8%8D%E4%BD%9C%E4%B8%BA%2014928&spd=5&source=web`;
