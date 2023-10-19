@@ -146,7 +146,7 @@ function playOne(element, callBack) {
     currentAudio.onended = function () {
         if (currentLoopCount < loopCount) {
             currentLoopCount++;
-            playHan(element, function () {
+            playSplitWord(element, function () {
                 setTimeout((v) => currentAudio.play(), timeOUt);
             });
 
@@ -177,7 +177,7 @@ function playSplitWord(element, callBack) {
         let audio = new Audio(url);
         audio.onended = function () {
 
-            playHanUrl(element, callBack)
+            playHan(element, callBack)
 
         };
         audio.play();
@@ -188,7 +188,7 @@ function playSplitWord(element, callBack) {
         }
     }
 }
-function playHanUrl(element, callBack) {
+function playHan(element, callBack) {
     var chinese = element.parentElement?.lastChild?.data;
 
     if (chinese) {
