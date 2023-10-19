@@ -25,6 +25,7 @@
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script>
       
+ 
 let currentAudio = null;
 let loopCount = 50;
 let currentLoopCount = 0;
@@ -146,9 +147,11 @@ function playOne(element, callBack) {
     currentAudio.onended = function () {
         if (currentLoopCount < loopCount) {
             currentLoopCount++;
-            playSplitWord(element, function () {
-                setTimeout((v) => currentAudio.play(), timeOUt);
-            });
+            if (currentLoopCount % preCountPlayHan == 0) {
+                playSplitWord(element, function () {
+                    setTimeout((v) => currentAudio.play(), timeOUt);
+                });
+            } else { setTimeout((v) => currentAudio.play(), timeOUt); }
 
         } else {
             stopPlay(lastElement);
