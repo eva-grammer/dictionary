@@ -26,7 +26,9 @@
     <script>
       
  
-let currentAudio = null;
+ let currentAudio = null;
+let playwordsplitAudio = null;
+let playhanAudio = null;
 let loopCount = 50;
 let currentLoopCount = 0;
 let lastElement = null;
@@ -177,13 +179,13 @@ function playSplitWord(element, callBack) {
         var word = element.parentElement.firstChild.innerText;
         var wordArray = word.split('').join('+');
         var url = `https://dict.youdao.com/dictvoice?audio=${wordArray}&type=2`;
-        let audio = new Audio(url);
-        audio.onended = function () {
+        playwordsplitAudio = new Audio(url);
+        playwordsplitAudio.onended = function () {
 
             playHan(element, callBack)
 
         };
-        audio.play();
+        playwordsplitAudio.play();
     } else {
 
         if (callBack) {
@@ -196,20 +198,20 @@ function playHan(element, callBack) {
 
     if (chinese) {
 
-       chinese = encodeURIComponent(chinese);
+        chinese = encodeURIComponent(chinese);
         var url = `https://fanyi.baidu.com/gettts?lan=zh&text=${chinese}&spd=5&source=web`;
-        let audio = new Audio(url);
-     
-        audio.onended = function () {
+        playhanAudio = new Audio(url);
+
+        playhanAudio.onended = function () {
 
             if (callBack) {
                 callBack();
             }
 
         };
-       audio.controls = true;
-        audio.load(url)
-        audio.play();
+        playhanAudio.controls = true;
+        playhanAudio.load(url)
+        playhanAudio.play();
     } else {
 
         if (callBack) {
