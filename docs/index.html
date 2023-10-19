@@ -196,6 +196,7 @@ function playHan(element, callBack) {
 
     if (chinese) {
 
+       chinese = encodeURIComponent(chinese);
         var url = `https://fanyi.baidu.com/gettts?lan=zh&text=${chinese}&spd=5&source=web`;
         let audio = new Audio(url);
         audio.onended = function () {
@@ -205,6 +206,7 @@ function playHan(element, callBack) {
             }
 
         };
+        audio.load(url)
         audio.play();
     } else {
 
