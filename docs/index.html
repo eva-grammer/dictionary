@@ -23,7 +23,7 @@
       };
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-     <script src="blip.js"></script>
+    
     <script>
      
 let currentAudio = null;
@@ -340,19 +340,7 @@ function playHanTest() {
     let playhanAudio = new Audio(url);
     playhanAudio.play();
 }
-       blip
-      .sampleLoader()
-      .samples({
-        snare:
-          "https://fanyi.baidu.com/gettts?lan=zh&text=%20%E4%B8%8D%E6%B4%BB%E5%8A%A8%EF%BC%9B%E4%B8%8D%E4%BD%9C%E4%B8%BA%2014928&spd=5&source=web",
-      })
-      .done(callback)
-      .load();
-
-    function callback() {
-      // now your samples are available
-      blip.sample("snare"); // is an AudioBuffer
-    }
+       
     </script>
   </body>
 </html>
