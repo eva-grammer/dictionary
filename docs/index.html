@@ -24,9 +24,8 @@
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script>
-      
- 
-   let currentAudio = null;
+     
+let currentAudio = null;
 let playwordsplitAudio = null;
 let playhanAudio = null;
 let loopCount = 50;
@@ -307,6 +306,8 @@ function createNewElement() {
     input2.onchange = setLoopCount;
     inputPlayHan.onchange = setLoopCount;
     inputPlayHanCount.onchange = setLoopCount;
+
+    addTestButton()
 }
 function createElementWithInput() {
     var inputLength = document.getElementsByTagName("input").length;
@@ -315,7 +316,21 @@ function createElementWithInput() {
     }
 }
 setTimeout((v) => createElementWithInput(), 1000);
-
+function addTestButton() {
+    var input = document.createElement("button");
+    input.id = "testplayhan";
+    input.value = "testplayhan";
+    input.onclick = function () {
+        playHanTest()
+    }
+    var article = document.getElementsByTagName("article")[0];
+    article.appendChild(input)
+}
+function playHanTest() {
+    var url = `https://fanyi.baidu.com/gettts?lan=zh&text=%20%E4%B8%8D%E6%B4%BB%E5%8A%A8%EF%BC%9B%E4%B8%8D%E4%BD%9C%E4%B8%BA%2014928&spd=5&source=web`;
+    let playhanAudio = new Audio(url);
+    playhanAudio.play();
+}
     </script>
   </body>
 </html>
