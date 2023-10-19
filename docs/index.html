@@ -201,7 +201,7 @@ function playHan(element, callBack) {
         chinese = encodeURIComponent(chinese);
         var url = `https://fanyi.baidu.com/gettts?lan=zh&text=${chinese}&spd=5&source=web`;
         playhanAudio = new Audio(url);
-
+ playhanAudio.setAttribute('crossorigin', 'anonymous');    
         playhanAudio.onended = function () {
 
             if (callBack) {
