@@ -210,8 +210,8 @@ function playHan(element, callBack) {
     if (chinese) {
 
         chinese = encodeURIComponent(chinese.replace(/[a-z0-9]/gi, ''));
-       //   var url = `https://dict-mobile.iciba.com/interface/index.php?c=word&m=translatetts&client=6&timestamp=1697707413&sign=e4990a37cb88f1e0&word=${chinese}&tts_lan=8`;
-    var url=`https://dict.youdao.com/dictvoice?audio=${chinese}&le=zh`;
+       var url = `https://dict-mobile.iciba.com/interface/index.php?c=word&m=translatetts&client=6&timestamp=1697707413&sign=e4990a37cb88f1e0&word=${chinese}&tts_lan=8`;
+  //   var url=`https://dict.youdao.com/dictvoice?audio=${chinese}&le=zh`;
         playhanAudio = new Audio(url);
 
         playhanAudio.onended = function () {
