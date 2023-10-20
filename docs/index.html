@@ -177,8 +177,9 @@ function playOne(element, callBack) {
 function playSplitWord(element, callBack) {
     if (element.parentElement.firstChild.tagName == "STRONG") {
         var word = element.parentElement.firstChild.innerText;
-        var wordArray = word.split('').join('+');
-        var url = `https://dict.youdao.com/dictvoice?audio=${wordArray}&type=2`;
+        var wordArray = word.split('').join(';');
+      var url = `https://dict-mobile.iciba.com/interface/index.php?c=word&m=translatetts&client=6&timestamp=1697770009&sign=9a5d712ac6617918&word=${wordArray}&tts_lan=1`;
+       // var url = `https://dict.youdao.com/dictvoice?audio=${wordArray}&type=2`;
         playwordsplitAudio = new Audio(url);
         playwordsplitAudio.onended = function () {
 
