@@ -176,6 +176,7 @@
               currentAudio.errorCount = 0;
             }
             currentAudio.errorCount++;
+            console.error("errorCount:" + currentAudio.errorCount);
             if (currentAudio.errorCount > 10) {
               if (callBack) {
                 callBack();
