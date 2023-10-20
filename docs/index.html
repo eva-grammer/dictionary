@@ -275,14 +275,14 @@ function createNewElement() {
 
     var lable4 = document.createTextNode("次");
 
-
+ var br = document.createElement("br");
 
     var lable5 = document.createTextNode("播放单词拼写和意思");
 
     var inputPlayHan = document.createElement("input");
     inputPlayHan.id = "inputPlayHan";
     inputPlayHan.type = "checkbox";
-
+inputPlayHan.checked=true;
     var lable6 = document.createTextNode("每几次播放单词，播放一次拼写和意思");
 
     var inputPlayHanCount = document.createElement("input");
@@ -299,7 +299,7 @@ function createNewElement() {
     article.insertBefore(lable3, qutoelement);
     article.insertBefore(input2, qutoelement);
     article.insertBefore(lable4, qutoelement);
-
+ article.insertBefore(br, qutoelement);
 
     article.insertBefore(lable5, qutoelement);
     article.insertBefore(inputPlayHan, qutoelement);
